@@ -17,7 +17,7 @@
          html {
              font-family: Arial, Helvetica, sans-serif;
              background: linear-gradient(to right, #57c1eb 0%, #246fa8 100%);
-             font-size: 18px;
+             font-size: 10px;
          }
          body {
              display:grid;
@@ -41,8 +41,7 @@
          }    
          #search-container,
          #convers-list,
-         #new-message-container
-         /* #message-list */  { 
+         #new-message-container { 
             background: #0048AA;          
          }
          #search-container{
@@ -65,8 +64,7 @@
              padding-left: 48px;
              padding-right: 20px;
              font-size:1.4rem;
-             /* background: image(src='/images/imgres.svg'); */
-             background:url('/images/search.png') no-repeat rgba(255,255,255, 0.3);
+             background: url('./images/search.svg') no-repeat rgba(255,255,255, 0.3);
              background-position: 15px center;
              background-size: 20px 20px;
          }
@@ -78,12 +76,13 @@
           
          #convers-list {
              grid: convers-list;
+             overflow-y: scroll;
          }
 
          .conversation {
              display: grid;
              grid-template-columns: 40px 1fr max-content;
-             grid-gap:
+             grid-gap: 10px;
              color: #ddd;
              font-size: 1.3rem;
              border-bottom: 1px solid #002C88;
@@ -110,11 +109,23 @@
          .title-text {
              font-weight: bold;
              color: #eee;
+             padding-left: 5px;
+             white-space: nowrap;
+             overflow-x: hidden;
+             text-overflow: ellipsis;
          }
 
          .created-date {
              color:#ddd;
              font-size: 1rem;
+         }
+
+         .conversation-message {
+             grid-column: span 2;
+             padding-left: 5px;
+             white-space: nowrap;
+             overflow-x: hidden;
+             text-overflow: ellipsis;
          }
 
          #new-message-container{
@@ -152,17 +163,61 @@
             grid-area: chat-title;
             color: #0048AA;
             font-weight: bold;
-            font-size: 2.0rem;
+            font-size: 1.8rem;
             border-radius: 0 10px 0 0;
-            box-shadow: 0 1px 3x -1px rgba(0,0, 0, 0.25);
-            padding: 0 20px;
+            box-shadow: 0 1px 3px -1px rgba(0,0, 0, 0.75);
+            padding: 0 60px;
          }
 
-         #chat-title {
+         #chat-title > img {
              cursor: pointer;
+             background-size: 32px 32px;
          }
          #chat-message-list{
              grid-area: chat-message-list;
+             display: flex;
+             flex-direction: column-reverse;
+             padding: 0 20px;
+         }
+
+         .message-row {
+             display: grid;
+             grid-template-columns: 70%;
+             margin-bottom: 20px;
+         }
+
+         .you-message {
+             justify-content: end;
+             justify-items: end;
+         }
+
+         .other-message {
+             justify-items: start;
+         }
+
+         .message-text {
+             padding: 9px 14px;
+             font-size: 1.6rem;
+             margin-bottom: 5px;
+         }
+
+         .message-time {
+             font-size: 1.3rem;
+             color: #777;
+         }
+
+         .you-message .message-text {
+             background: #0048AA;
+             color: #eee;
+             border: 1px solid #0048AA;
+             border-radius: 14px 14px 0 14px;
+         }
+         
+         .other-message .message-text {
+             background: #0048AA;
+             color: #111;
+             border: 1px solid #ddd;
+             border-radius: 14px 14px 14px 0;
          }
 
          #chat-form {
@@ -178,14 +233,18 @@
              padding-right: 22px;
          }
 
-         #chat-form {
+         #chat-form input {
              outline:none;
              padding: 15px;
              border: 2px solid #ddd;
+             color: #330;
              border-radius: 6px;
              font-size: 1.4rem;
          }
-
+         
+         ::-webkit-scrollbar{
+             display: none;
+         }
         
           
     </style>
@@ -193,14 +252,19 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/view.css' />
 </head>
 <body>
+    <div>
+        <video>
+            
+        </video>
+    </div>
     <div id="video-view-chat-container">
         <div id='search-container'>
             <input  type='text' placeholder='Search'/>
         </div>
         <div id='convers-list'>
-            <div class='conversation active'>
+            <div class='conversation'>
                  <img src='images/' alt='Nicholas Johndoe' />
-                 <div class='titlt-text'>
+                 <div class='title-text'>
                      Nicholas Johndoe
                  </div>
                  <div class='created-date'>
@@ -210,19 +274,78 @@
                       This is a message
                  </div>
             </div>
+            <div class='conversation'>
+                <img src='images/' alt='Moses samoe' />
+                <div class='title-text'>
+                   Moses Samoa
+                </div>
+                <div class='created-date'>
+                    Mar 7
+                </div>
+                <div class='conversation-message'>
+                    This is a message
+                </div>
+           </div>
+           <div class='conversation'>
+                <img src='images/' alt='Fabian Anyanw' />
+                <div class='title-text'>
+                    Fabian Anyanw
+                </div>
+                <div class='created-date'>
+                    Apr 8
+                </div>
+                <div class='conversation-message'>
+                    This is a message
+                </div>
+            </div>
+            <div class='conversation'>
+                <img src='images/' alt='osas Pepple' />
+                <div class='title-text'>
+                    osas Pepple
+                </div>
+                <div class='created-date'>
+                    1 day ago
+                </div>
+                <div class='conversation-message'>
+                     This is a message
+                </div>
+           </div>
+           <div class='conversation'>
+                <img src='images/' alt='david Nible' />
+                <div class='title-text'>
+                    David Nible
+                </div>
+                <div class='created-date'>
+                    3 days ago
+                </div>
+                <div class='conversation-message'>
+                    This is a message
+                </div>
+            </div>
         </div>
         <div id='new-message-container'> 
              <a href="#">+</a>
         </div>
         <div id='chat-title'> 
-            <span>Nicholas Johndoe</span>
-            <img src='/images/delete.svg' alt="Delete"/>
+            <span>Nicholas John</span>
+            <!-- <img  src='./images/delete.svg' alt="Delete_tab"/> -->
         </div>
         <div id='chat-message-list'>
-
+            <div class='message-row you-message'>
+                <div class='message-text'>Ok then</div>
+                <div class='message-time'>Nov 23</div>
+            </div>
+            <div class='message-row other-message'>
+                <img src='images/'>
+                <div class='message-text'>So aftermath what next then, hat do you think of it having a who
+                    lot of much strings to test how the tex could accomodate inside of the textbox 
+                    how it could look like
+                </div>
+                <div class='message-time'>Nov 23</div>
+            </div>
         </div>
         <div id='chat-form'> 
-             <img src='./images/' alt="Add Attachment"/>
+             <img src='./images/paperclip.svg' alt="Add Attachment"/>
              <input type='text' placeholder='type a message'/>
         </div>
     </div>
